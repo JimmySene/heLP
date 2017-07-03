@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+
+  <title>heLP</title>
+
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="index.css" rel="stylesheet">
+  <link href="datepicker/css/bootstrap-datepicker3.min.css"rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- Ecran de chargement -->
+  <div id="loadingScreen">
+    <div class="loading-screen-logo">
+      <span class="help help-white">h</span>
+      <span class="help help-white">e</span>
+      <span class="help help-red">L</span>
+      <span class="help help-red">P</span>
+    </div>
+  </div>
+
+  <!-- Ecran d'erreur si le navigateur est different de firefox -->
+  <div id="firefox-missing" style="display:none;">
+    <span class="label label-danger">
+      Votre navigateur n'est pas supporté.<br> heLP nécessite le navigateur Firefox
+    </span>
+    <div>
+      Si le navigateur Firefox  <img src="images/firefox-512.png" alt="firefox">
+      n'est pas installé sur votre terminal, vous pouvez l'installer à partir du
+       store d'applications F-Droid <img src="images/f-droid.png" alt="f-droid">
+     </div>
+  </div>
+
+  <!-- Ecran d'accueil de selection de la langue -->
+  <div id="accueil" class="container" style="display:none">
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h2 class="page-header accueil-page-header">
+          Sélectionnez une langue pour ouvrir un nouveau formulaire
+        </h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+        <button type="button" class="btn btn-info btn-block btn-lg myButton" onclick="afficherTexte('fr')">
+          <p>Formulaire</p>
+          <p>Français</p>
+        </button>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+        <button type="button" class="btn btn-warning btn-block btn-lg myButton" onclick="afficherTexte('en')">
+          <p>Anglais / <i>English</i></p>
+          <!-- <p><i>English</i></p> -->
+          <p style="text-align:center;"><b>Assist. tél. INALCO : 01.53.76.60.55</b></p>
+        </button>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+        <button type="button" class="btn btn-success btn-block btn-lg myButton" onclick="afficherTexte('es')">
+          <p>Espagnol</p>
+          <p><i>Castellano</i></p>
+        </button>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+        <button type="button" class="btn btn-info btn-block btn-lg myButton" onclick="afficherTexte('de')">
+          <p>Allemand</p>
+          <p><i>Deutsch</i></p>
+        </button>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+        <button type="button" class="btn btn-warning btn-block btn-lg myButton" onclick="afficherTexte('it')">
+          <p>Italien</p>
+          <p><i>Italiano</i></p>
+        </button>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+        <button type="button" class="btn btn-success btn-block btn-lg myButton" onclick="afficherTexte('ar')">
+          <p>Arabe / <i>العربية</i> </p>
+          <!-- <p>العربية</p> -->
+          <p style="text-align:center;"><b>Assist. tél. INALCO : 01.53.76.60.55</b></p>
+        </button>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+        <button type="button" class="btn btn-info btn-block btn-lg myButton" onclick="afficherTexte('ja')">
+          <p>Japonais / <i>日本語</i></p>
+          <!-- <p><i>日本語</i></p> -->
+          <p style="text-align:center;"><b>Assist. tél. INALCO : 01.53.76.60.55</b></p>
+        </button>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+        <button type="button" class="btn btn-warning btn-block btn-lg myButton" onclick="afficherTexte('zh')">
+          <p>Chinois / <i>中國</i></p>
+          <!-- <p><i>中國</i></p> -->
+          <p style="text-align:center;"><b>Assist. tél. INALCO : 01.53.76.60.55</b></p>
+        </button>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+        <button type="button" class="btn btn-success btn-block btn-lg myButton" onclick="afficherTexte('ko')">
+          <p>Coréen / <i>한국어</i></p>
+          <!-- <p><i>한국어</i></p> -->
+          <p style="text-align:center;"><b>Assist. tél. INALCO : 01.53.76.60.55</b></p>
+        </button>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+        <button type="button" class="btn btn-info btn-block btn-lg myButton" onclick="afficherTexte('tr')">
+          <p>Turc</p>
+          <p><i>Türk</i></p>
+        </button>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+        <button type="button" class="btn btn-warning btn-block btn-lg myButton" onclick="afficherTexte('ru')">
+          <p>Russe</p>
+          <p><i>русский</i></p>
+        </button>
+      </div>
+
+    </div>
+
+    <button id="version" type="button" class="btn btn-default">
+      <span>i</span>
+    </button>
+    <div id="attribution" style="display:none;">
+      <div class="attribution_perso">
+        heLP Version 2.3
+      </div>
+
+      <div class="attribution_perso">
+        signaturePad made by <a href="https://github.com/szimek/signature_pad" title="Szymon Nowak">Szymon Nowak</a> is licensed by <a href="http://www.opensource.org/licenses/MIT" title="MIT Licence" target="_blank">MIT Licence</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="myCarousel" class="carousel slide" data-ride="carousel" style="display:none;">
+
+    <!-- Menu de selection des langues -->
+    <div id="menuLangue" class="btn-group">
+      <button id="boutonLangue" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        Langue
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li onclick="affiche('fr')"><a href="#">Français</a></li>
+        <li onclick="affiche('en')"><a href="#">Anglais</a></li>
+        <li onclick="affiche('ar')"><a href="#">Arabe</a></li>
+        <li onclick="affiche('de')"><a href="#">Allemand</a></li>
+        <li onclick="affiche('zh')"><a href="#">Chinois</a></li>
+        <li onclick="affiche('ko')"><a href="#">Coréen</a></li>
+        <li onclick="affiche('es')"><a href="#">Espagnol</a></li>
+        <li onclick="affiche('it')"><a href="#">Italien</a></li>
+        <li onclick="affiche('ja')"><a href="#">Japonais</a></li>
+        <li onclick="affiche('ru')"><a href="#">Russe</a></li>
+        <li onclick="affiche('tr')"><a href="#">Turc</a></li>
+      </ul>
+    </div>
+
+    <div id="logoDiv">
+      <div class="row">
+        <div class="encart-dspap" >
+          DIRECTION DE LA SÉCURITÉ DE <br> PROXIMITÉ DE L'AGGLOMÉRATION <br> PARISIENNE <br> Direction Territoriale de la Sécurité <br> de Proximité de Paris
+        </div>
+        <img class="logoPP" src="images/pp.jpg" alt="">
+        <div class="encart-parquet">
+          Destinataire <br> PARQUET DE PARIS <br><br> 4 boulevard du Palais <br> 75001 PARIS
+        </div>
+      </div>
+    </div>
+
+    <div id="boutonRetour" class="btn-group" onclick="retourAccueilConfirm()">
+      <button type="button" class="btn btn-default">
+        Retour
+      </button>
+    </div>
+    <form id="form">
+
+    <div class="carousel-inner" role="listbox">
+
+      <!-- Page 1 victime -->
+      <div class="item active" data-swiperight="no">
+        <div class="container">
+          <div class="carousel-caption">
+            <h2 class="trad" data-content="element_9"></h2>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped active progress-bar-success" role="progressbar">
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-xs-12 col-md-4">
+                <label class="trad" data-content="element_92"></label>
+              </div>
+              <div class="col-xs-offset-1 col-md-offset-0 col-xs-5 col-sm-5 col-md-4">
+                <label class="radio-inline trad" data-content="element_93">
+                  <input type="radio" name="element_92" value="M"></label>
+              </div>
+              <div class="col-xs-6 col-sm-6 col-md-4">
+                <label class="radio-inline trad" data-content="element_94">
+                  <input type="radio" name="element_92" value="Mme"></label>
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-xs-12 col-sm-6 col-md-6">
+                <label class="trad" data-content="element_10"></label>
+                <input class="form-control" type="text" name="element_10">
+              </div>
+
+              <!-- colonne vide -->
+              <!-- <div class="col-xs-12 col-sm-6 col-md-6">
+              </div> -->
+            </div>
+
+            <div class="row form-group">
+              <div class="col-xs-12 col-sm-6 col-md-6">
+                <label class="trad" data-content="element_98"></label>
+                <input class="form-control" type="text" name="element_98">
+              </div>
+
+              <div class="col-xs-12 col-sm-6 col-md-6">
+                <label class="trad" data-content="element_11"></label>
+                <input class="form-control" type="text" name="element_11">
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-xs-12 col-sm-6 col-md-6">
+                <label class="trad" data-content="element_12"></label>
+                  <input id="element_12" type="text" class="form-control" name="element_12" readonly="">
+              </div>
+
+              <div class="col-xs-12 col-sm-6 col-md-6">
+                <label class="trad" data-content="element_13"></label>
+                <input class="form-control" type="text" name="element_13">
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-xs-12 col-sm-6 col-md-6">
+                <label class="trad" data-content="element_14"></label>
+                <input class="form-control" type="text" name="element_14">
+              </div>
+
+              <div class="col-xs-12 col-sm-6 col-md-6">
+                <label class="trad" data-content="element_15"></label>
+                <input class="form-control" type="text" name="element_15">
+              </div>
+            </div>
+
+            <a href="#myCarousel" role="button" data-slide="next">
+              <button type="button" class="btn btn-primary trad" data-content="element_78"></button>
+            </a>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 2 Victime -->
+      <div class="item">
+        <div class="container">
+          <div class="carousel-caption">
+            <h2 class="trad" data-content="element_16"></h2>
+
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped active progress-bar-success" role="progressbar">
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <label class="trad" data-content="element_17"></label>
+                <input class="form-control" type="text" name="element_17">
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-xs-12 col-sm-6 col-md-6">
+                <label class="trad" data-content="element_19"></label>
+                <input class="form-control" type="email" name="element_19">
+                <label class="trad" data-content="element_99"></label>
+              </div>
+
+              <div class="col-xs-12 col-sm-6 col-md-6">
+                <label class="trad" data-content="element_18"></label>
+                <input class="form-control" type="tel" name="element_18">
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-xs-12 col-sm-6 col-md-6">
+                <label class="trad" data-content="element_20"></label>
+                <input class="form-control" type="text" name="element_20">
+              </div>
+
+              <div class="col-xs-12 col-sm-6 col-md-6">
+                <label class="trad" data-content="element_21"></label>
+                <!-- champ de date pour la date de depart de Paris -->
+                  <input id="element_21" type="text" class="form-control" name="element_21" readonly="">
+              </div>
+            </div>
+
+            <a id="backButton" href="#myCarousel" role="button" data-slide="prev">
+              <button type="button" class="btn btn-primary trad" data-content="element_77"></button>
+            </a>
+            <a href="#myCarousel" role="button" data-slide="next">
+              <button type="button" class="btn btn-primary trad" data-content="element_78"></button>
+            </a>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 3 faits -->
+      <div class="item">
+        <div class="container">
+          <div class="carousel-caption">
+
+            <h2 class="trad" data-content="element_1"></h2>
+
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped active progress-bar-success" role="progressbar">
+              </div>
+            </div>
+
+            <!-- Type de vol -->
+            <label class="trad" data-content="element_2"></label>
+            <div class="row form-group">
+              <div class="col-xs-12 col-md-6">
+                <label class="radio-inline trad" data-content="element_3">
+                  <input type="radio" name="element_2" value="Vol à la tire">
+                </label>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <label class="radio-inline trad" data-content="element_4">
+                  <input type="radio" name="element_2" value="Vol simple">
+                </label>
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-xs-12 col-sm-6">
+                <label class="trad" data-content="element_5"></label>
+                <select id="select1" name="element_5" class="form-control">
+                  <option value=""></option>
+                  <option value="Poche" data-content="element_96">Poche</option>
+                  <option value="Sac" data-content="element_97">Sac</option>
+                  <option value="Autre" data-content="element_40">Autre</option>
+                </select>
+                <!-- Champ de saisie visible si 'autre' est selectionne -->
+                <input id="autreLocalisationInput" class="form-control" type="text" name="autreLocalisation" style="display:none; margin-top:5px;" placeholder="Précisez">
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-xs-6 col-sm-6 col-md-6">
+                <label class="trad" data-content="element_6"></label>
+                <input id="element_6" class="form-control" name="element_6" readonly="">
+              </div>
+              <div class="col-xs-6 col-sm-6 col-md-6">
+                <label class="trad" data-content="element_7"></label>
+                <input class="form-control" name="element_7" size="25" type="time">
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-xs-12 ol-md-12">
+                <label class="trad" data-content="element_8"></label>
+                <textarea class="form-control" name="element_8" rows="2" cols="80" type="text"></textarea>
+              </div>
+            </div>
+            <a href="#myCarousel" role="button" data-slide="prev">
+              <button type="button" class="btn btn-primary trad" data-content="element_77"></button>
+            </a>
+            <a href="#myCarousel" role="button" data-slide="next">
+              <button type="button" class="btn btn-primary trad" data-content="element_78"></button>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 4 prejudice -->
+      <div class="item">
+        <div class="container">
+          <div class="carousel-caption">
+            <h2 class="trad" data-content="element_56"></h2>
+
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped active progress-bar-success" role="progressbar">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12 col-md-3">
+                <label class="trad" data-content="element_57"></label>
+              </div>
+              <div class="col-xs-12 col-md-9">
+                <label class="trad" data-content="element_58"></label>
+              </div>
+            </div>
+
+              <div class="row">
+                <div class="control-group">
+                  <div class="controls-objets">
+                    <div class="entry-objets form-group col-xs-12 col-sm-12 col-md-12">
+
+                      <div class="col-xs-12 col-sm-3 col-md-3">
+                        <select name="element_57" class="form-control">
+                          <option value=""></option>
+                          <option value="Sac à main, portefeuille ou porte-monnaie" data-content="element_59">Sac à main, portefeuille ou porte-monnaie</option>
+                          <option value="Argent en espèce" data-content="element_60">Argent en espèces</option>
+                          <option value="Carte de crédit" data-content="element_61">Carte de crédit</option>
+                          <option value="Chèques de voyage" data-content="element_62">Chèques de voyage</option>
+                          <option value="Billet d'avion" data-content="element_63">Billet d'avion</option>
+                          <option value="Passeport" data-content="element_64">Passeport</option>
+                          <option value="Carte d'identité" data-content="element_65">Carte d'identité</option>
+                          <option value="Permis de conduire" data-content="element_66">Permis de conduire</option>
+                          <option value="Téléphone portable" data-content="element_67">Téléphone portable</option>
+                          <option value="Appareil photo" data-content="element_68">Appareil photo</option>
+                          <option value="Camescope" data-content="element_69">Caméscope</option>
+                          <option value="Bijoux" data-content="element_70">Bijoux</option>
+                          <option value="Autre" data-content="element_71">Autre objet</option>
+                        </select>
+                      </div>
+                      <div class="col-xs-12 col-sm-5 col-md-6">
+                        <input class="form-control "type="text" name="element_58">
+                      </div>
+                      <div class="col-xs-12 col-sm-4 col-md-3">
+                        <button class="btn btn-success btn-add-objet trad" type="button" name="button" class="trad" data-content="element_72"></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <a href="#myCarousel" role="button" data-slide="prev">
+              <button type="button" class="btn btn-primary trad" data-content="element_77"></button>
+            </a>
+            <a href="#myCarousel" role="button" data-slide="next">
+              <button type="button" class="btn btn-primary trad" data-content="element_78"></button>
+            </a>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 5 Description auteur 1-->
+      <div class="item">
+        <div class="container">
+          <div class="carousel-caption">
+            <h2 class="trad" data-content="element_22"></h2>
+
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped active progress-bar-success" role="progressbar">
+              </div>
+            </div>
+
+            <p class="trad" data-content="element_23"></p>
+
+            <div class="row form-group">
+              <div class="col-xs-12 col-md-6">
+                <label class="trad" data-content="element_24"></label>
+              </div>
+              <div class="col-xs-12 col-md-2">
+                <input class="form-control" type="number" name="element_24">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 col-xs-12">
+                <label class="trad" data-content="element_82"></label>
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-xs-12 col-md-2">
+                <label class="trad" data-content="element_25"></label>
+              </div>
+              <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-0 col-xs-11 col-sm-5 col-md-3">
+                <label class="radio-inline trad" data-content="element_26">
+                  <input type="radio" name="element_25" value="Homme"></label>
+              </div>
+              <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-0 col-xs-11 col-sm-5 col-md-3">
+                <label class="radio-inline trad" data-content="element_27">
+                  <input type="radio" name="element_25" value="Femme"></label>
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                <label class="trad" data-content="element_28"></label>
+                <input class="form-control" type="number" name="element_28">
+              </div>
+
+              <div class="col-xs-6 col-sm-4 col-md-3">
+                <label class="trad" data-content="element_29"></label>
+                <input class="form-control" type="number" name="element_29">
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-xs-12 col-md-3">
+                <label class="trad" data-content="element_30"></label>
+              </div>
+              <div class="col-xs-offset-1 col-xs-11 col-sm-4 col-md-3">
+                <label class="radio-inline trad" data-content="element_31">
+                  <input type="radio" name="element_30" value="Gros">
+                </label>
+              </div>
+              <div class="col-xs-offset-1 col-xs-11 col-sm-4 col-md-3">
+                <label class="radio-inline trad" data-content="element_32">
+                  <input type="radio" name="element_30" value="Moyen">
+                </label>
+              </div>
+              <div class="col-xs-offset-1 col-xs-11 col-sm-4 col-md-3">
+                <label class="radio-inline trad" data-content="element_33">
+                  <input type="radio" name="element_30" value="Maigre">
+                </label>
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-xs-12 col-sm-6 col-md-6">
+                <label class="trad" data-content="element_34"></label>
+                <input class="form-control" type="text" name="element_34">
+              </div>
+
+              <div class="col-xs-12 col-sm-6 col-md-6">
+                <label class="trad" data-content="element_41"></label>
+                <select id="select2" name="element_41" class="form-control">
+                  <option value=""></option>
+                  <option value="Noir" data-content="element_42">Noir</option>
+                  <option value="Brun" data-content="element_43">Brun</option>
+                  <option value="Blond" data-content="element_44">Blond</option>
+                  <option value="Blanc" data-content="element_45">Blanc</option>
+                  <option value="Roux" data-content="element_46">Roux</option>
+                  <option value="Chauve" data-content="element_47">Chauve</option>
+                  <option value="Autre" data-content="element_40">Autre</option>
+                </select>
+                <!-- Champ de saisie visible si 'autre' est selectionne -->
+                <input id="typeCheveuxInput" class="form-control" type="text" name="cheveuxVoleur" style="display:none; margin-top:5px;" placeholder="Précisez">
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <label class="trad" data-content="element_49"></label>
+              </div>
+              <div class="col-xs-12 col-sm-4 col-md-4">
+                <label class="radio-inline trad" data-content="element_50">
+                  <input type="checkbox" name="element_50" value="Moustache">
+                </label>
+              </div>
+              <div class="col-xs-12 col-sm-4 col-md-4">
+                <label class="radio-inline trad" data-content="element_51">
+                  <input type="checkbox" name="element_51" value="Barbe">
+                </label>
+              </div>
+              <div class="col-xs-12 col-sm-4 col-md-4">
+                <label class="radio-inline trad" data-content="element_52">
+                  <input type="checkbox" name="element_52" value="Lunettes">
+                </label>
+              </div>
+              <div class="col-xs-12 col-sm-4 col-md-4">
+                <label class="radio-inline trad" data-content="element_53">
+                  <input type="checkbox" name="element_53" value="Cicatrice">
+                </label>
+              </div>
+              <div class="col-xs-12 col-sm-4 col-md-4">
+                <label class="radio-inline trad" data-content="element_54">
+                  <input type="checkbox" name="element_54" value="Tatouage">
+                </label>
+              </div>
+              <div class="col-xs-12 col-sm-4 col-md-4">
+                <label class="radio-inline trad" data-content="element_55">
+                  <input type="checkbox" name="element_55" value="Piercing">
+                </label>
+              </div>
+            </div>
+
+            <a href="#myCarousel" role="button" data-slide="prev">
+              <button type="button" class="btn btn-primary trad" data-content="element_77"></button>
+            </a>
+            <a href="#myCarousel" role="button" data-slide="next">
+              <button type="button" class="btn btn-primary trad" data-content="element_78"></button>
+            </a>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 6 Description auteur 2 -->
+      <div class="item">
+        <div class="container">
+          <div class="carousel-caption">
+            <h2 class="trad" data-content="element_22_bis"></h2>
+
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped active progress-bar-success" role="progressbar">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 col-xs-12">
+                <label class="trad" data-content="element_83"></label>
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-xs-12 col-md-2">
+                <label class="trad" data-content="element_25_bis"></label>
+              </div>
+              <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-0 col-xs-11 col-sm-5 col-md-3">
+                <label class="radio-inline trad" data-content="element_26_bis">
+                  <input type="radio" name="element_25_bis" value="Homme"></label>
+                </div>
+                <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-0 col-xs-11 col-sm-5 col-md-3">
+                  <label class="radio-inline trad" data-content="element_27_bis">
+                    <input type="radio" name="element_25_bis" value="Femme"></label>
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                  <div class="col-xs-6 col-sm-4 col-md-2">
+                    <label class="trad" data-content="element_28_bis"></label>
+                    <input class="form-control" type="number" name="element_28_bis">
+                  </div>
+
+                  <div class="col-xs-6 col-sm-4 col-md-3">
+                    <label class="trad" data-content="element_29_bis"></label>
+                    <input class="form-control" type="number" name="element_29_bis">
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                  <div class="col-xs-12 col-md-3">
+                    <label class="trad" data-content="element_30_bis"></label>
+                  </div>
+                  <div class="col-xs-offset-1 col-xs-11 col-sm-4 col-md-3">
+                    <label class="radio-inline trad" data-content="element_31_bis">
+                      <input type="radio" name="element_30_bis" value="Gros">
+                    </label>
+                  </div>
+                  <div class="col-xs-offset-1 col-xs-11 col-sm-4 col-md-3">
+                    <label class="radio-inline trad" data-content="element_32_bis">
+                      <input type="radio" name="element_30_bis" value="Moyen">
+                    </label>
+                  </div>
+                  <div class="col-xs-offset-1 col-xs-11 col-sm-4 col-md-3">
+                    <label class="radio-inline trad" data-content="element_33_bis">
+                      <input type="radio" name="element_30_bis" value="Maigre">
+                    </label>
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                  <div class="col-xs-12 col-sm-6 col-md-6">
+                    <label class="trad" data-content="element_34_bis"></label>
+                    <input class="form-control" type="text" name="element_34_bis">
+                  </div>
+
+                  <div class="col-xs-12 col-sm-6 col-md-6">
+                    <label class="trad" data-content="element_41_bis"></label>
+                    <select id="select4" name="element_41_bis" class="form-control">
+                      <option value=""></option>
+                      <option value="Noir" data-content="element_42_bis">Noir</option>
+                      <option value="Brun" data-content="element_43_bis">Brun</option>
+                      <option value="Blond" data-content="element_44_bis">Blond</option>
+                      <option value="Blanc" data-content="element_45_bis">Blanc</option>
+                      <option value="Roux" data-content="element_46_bis">Roux</option>
+                      <option value="Chauve" data-content="element_47_bis">Chauve</option>
+                      <option value="Autre" data-content="element_40_bis">Autre</option>
+                    </select>
+                    <!-- Champ de saisie visible si 'autre' est selectionne -->
+                    <input id="typeCheveuxInput_bis" class="form-control" type="text" name="cheveuxVoleur_bis" style="display:none; margin-top:5px;" placeholder="Précisez">
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                  <div class="col-xs-12 col-sm-12 col-md-12">
+                    <label class="trad" data-content="element_49_bis"></label>
+                  </div>
+                  <div class="col-xs-12 col-sm-4 col-md-4">
+                    <label class="radio-inline trad" data-content="element_50_bis">
+                      <input type="checkbox" name="element_50_bis" value="Moustache">
+                    </label>
+                  </div>
+                  <div class="col-xs-12 col-sm-4 col-md-4">
+                    <label class="radio-inline trad" data-content="element_51_bis">
+                      <input type="checkbox" name="element_51_bis" value="Barbe">
+                    </label>
+                  </div>
+                  <div class="col-xs-12 col-sm-4 col-md-4">
+                    <label class="radio-inline trad" data-content="element_52_bis">
+                      <input type="checkbox" name="element_52_bis" value="Lunettes">
+                    </label>
+                  </div>
+                  <div class="col-xs-12 col-sm-4 col-md-4">
+                    <label class="radio-inline trad" data-content="element_53_bis">
+                      <input type="checkbox" name="element_53_bis" value="Cicatrice">
+                    </label>
+                  </div>
+                  <div class="col-xs-12 col-sm-4 col-md-4">
+                    <label class="radio-inline trad" data-content="element_54_bis">
+                      <input type="checkbox" name="element_54_bis" value="Tatouage">
+                    </label>
+                  </div>
+                  <div class="col-xs-12 col-sm-4 col-md-4">
+                    <label class="radio-inline trad" data-content="element_55_bis">
+                      <input type="checkbox" name="element_55_bis" value="Piercing">
+                    </label>
+                  </div>
+                </div>
+
+                <a href="#myCarousel" role="button" data-slide="prev">
+                  <button type="button" class="btn btn-primary trad" data-content="element_77"></button>
+                </a>
+                <a href="#myCarousel" role="button" data-slide="next">
+                  <button type="button" class="btn btn-primary trad" data-content="element_78"></button>
+                </a>
+
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 7 Mode operatoire -->
+      <div class="item">
+        <div class="container">
+          <div class="carousel-caption">
+            <h2 class="trad" data-content="element_73"></h2>
+
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped active progress-bar-success" role="progressbar">
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-xs-12 col-md-12">
+                <label class="trad" data-content="element_74"></label>
+                <textarea class="form-control" name="element_74" rows="4" cols="80"></textarea>
+              </div>
+            </div>
+
+            <a href="#myCarousel" role="button" data-slide="prev">
+              <button type="button" class="btn btn-primary trad" data-content="element_77"></button>
+            </a>
+            <a href="#myCarousel" role="button" data-slide="next">
+              <button type="button" class="btn btn-primary trad" data-content="element_78"></button>
+            </a>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 8 signature de la victime-->
+      <div class="item">
+        <div class="container">
+          <div class="carousel-caption">
+            <h2 class="trad" data-content="element_75"></h2>
+
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped active progress-bar-success" role="progressbar">
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-xs-12">
+                <label class="trad" data-content="element_100"></label>
+                <input id="auteurPresumeInput" class="form-control" type="text" name="auteurPresume">
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <label class="trad" data-content="element_101">
+                  <input type="radio" name="element_100" value="QQN">
+                </label>
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <label class="trad" data-content="element_76">
+                  <input type="radio" name="element_100" value="X" checked>
+                </label>
+              </div>
+            </div>
+
+            <div class="row form-group barre">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <label class="trad" data-content="element_95">
+                  <input type="checkbox" name="element_95" value="Je précise que je reconnais formellement ces objets comme m’appartenant. Je prends acte que vous me remettez, en l’état, ces objets dérobés lors des faits avec accord de l’Officier de Police Judiciaire territorialement compétent">
+                </label>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-xs-12 col-sm-6 col-md-6">
+                <label><span id="dateVictime" lang="fr">Paris le </span></label>
+              </div>
+            </div>
+
+            <div class="">
+              <label class="trad" data-content="element_75"></label>
+            </div>
+            <div>
+              <canvas id="canvasVictime"></canvas>
+            </div>
+            <div class="row form-group">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+              <button class="btn btn-warning trad" id="resetButtonVictime" type="button" data-content="element_81"></button>
+              </div>
+            </div>
+
+            <a href="#myCarousel" role="button" data-slide="prev">
+              <button type="button" class="btn btn-primary trad" data-content="element_77"></button>
+            </a>
+            <a href="#myCarousel" role="button" data-slide="next">
+              <button type="button" class="btn btn-primary trad" data-content="element_78"></button>
+            </a>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 9 -->
+      <div class="item" data-swipeleft="no">
+        <div class="container">
+          <div class="carousel-caption">
+            <h2 class="trad" data-content="element_90"></h2>
+
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped active progress-bar-success" role="progressbar">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <label class="trad" data-content="element_84"></label>
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-xs-12 col-sm-6 col-md-3">
+                <label class="trad" data-content="element_85"></label>
+                <input class="form-control" type="text" name="element_85">
+              </div>
+
+              <div class="col-xs-12 col-sm-6 col-md-3">
+                <label class="trad" data-content="element_86"></label>
+                <input class="form-control" type="text" name="element_86">
+              </div>
+
+              <div class="col-xs-12 col-sm-6 col-md-3">
+                <label class="trad" data-content="element_87"></label>
+                <input class="form-control" type="text" name="element_87">
+              </div>
+
+              <div class="col-xs-12 col-sm-6 col-md-3">
+                <label class="trad" data-content="element_88"></label>
+                <input class="form-control" type="text" name="element_88">
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12 col-sm-6 col-md-6">
+                <label><span id="dateAgent" lang="fr">Paris le </span><span id="timeAgent" lang="fr"></span></label>
+              </div>
+            </div>
+
+            <div class="">
+              <label class="trad" data-content="element_89"></label>
+            </div>
+
+            <div>
+              <canvas id="canvasAgent"></canvas>
+            </div>
+            <div class="row form-group">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <button class="btn btn-warning trad" id="resetButtonAgent" data-content="element_81"></button>
+              </div>
+            </div>
+            <a href="#myCarousel" role="button" data-slide="prev">
+              <button class="btn btn-primary trad" data-content="element_77"></button>
+            </a>
+            <br>
+            <div class="row form-group">
+              <div class="col-xs-12 col-sm-6 col-md-3">
+                <label class="trad" data-content="element_91"></label>
+                <select id="select5" class="form-control" name="element_91">
+                  <option value="">Sélectionnez un SJS</option>
+                  <option value="1">1er arrondissement</option>
+                  <option value="2">2e arrondissement</option>
+                  <option value="3">3e arrondissement</option>
+                  <option value="4">4e arrondissement</option>
+                  <option value="5">5e et 6e arrondissements</option>
+                  <option value="7">7e arrondissement</option>
+                  <option value="8">8e arrondissement</option>
+                  <option value="9">9e arrondissement</option>
+                  <option value="10">10e arrondissement</option>
+                  <option value="11">11e arrondissement</option>
+                  <option value="12">12e arrondissement</option>
+                  <option value="13">13e arrondissement</option>
+                  <option value="14">14e arrondissement</option>
+                  <option value="15">15e arrondissement</option>
+                  <option value="16">16e arrondissement</option>
+                  <option value="17">17e arrondissement</option>
+                  <option value="18">18e arrondissement</option>
+                  <option value="19">19e arrondissement</option>
+                  <option value="20">20e arrondissement</option>
+                </select>
+            </div>
+
+              <a href="#myCarousel" role="button">
+                <button id="transmettreBouton" type="button" style="margin-top:25px;" class="btn btn-info trad" data-content="element_79"></button>
+              </a>
+
+          </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+
+    <!-- jquery mobile custom build ne contient que les touch events mais ne fonctionne pas avec jquery-3.1.1-->
+    <script src="jquery-2.2.4.min.js"></script>
+    <script src="jquery.mobile.custom.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="signature_pad.js"></script>
+    <script src="index.js"></script>
+
+    <!-- datepicker + langues du datepicker -->
+    <script src="datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="datepicker/locales/bootstrap-datepicker.fr.min.js"></script>
+    <script src="datepicker/locales/bootstrap-datepicker.ar.min.js"></script>
+    <script src="datepicker/locales/bootstrap-datepicker.es.min.js"></script>
+    <script src="datepicker/locales/bootstrap-datepicker.de.min.js"></script>
+    <script src="datepicker/locales/bootstrap-datepicker.it.min.js"></script>
+    <script src="datepicker/locales/bootstrap-datepicker.ko.min.js"></script>
+    <script src="datepicker/locales/bootstrap-datepicker.ja.min.js"></script>
+    <script src="datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script src="datepicker/locales/bootstrap-datepicker.tr.min.js"></script>
+    <script src="datepicker/locales/bootstrap-datepicker.ru.min.js"></script>
+
+    <!-- Traduction des intitules -->
+    <script src="traductions/anglais.js"></script>
+    <script src="traductions/arabe.js"></script>
+    <script src="traductions/francais.js"></script>
+    <script src="traductions/allemand.js"></script>
+    <script src="traductions/chinois.js"></script>
+    <script src="traductions/coreen.js"></script>
+    <script src="traductions/espagnol.js"></script>
+    <script src="traductions/italien.js"></script>
+    <script src="traductions/japonais.js"></script>
+    <script src="traductions/turc.js"></script>
+    <script src="traductions/russe.js"></script>
+    <script src="traductions/mentions.js"></script>
+  </body>
+  </html>
